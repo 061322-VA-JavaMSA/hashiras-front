@@ -1,1 +1,0 @@
-# hashiras-front
