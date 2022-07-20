@@ -12,4 +12,13 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  toggleDarkTheme(): void {
+    document.body.classList.toggle('dark-theme');
+  }
+
 }
+
+document.body.classList.toggle("dark-theme");
+
+
+
