@@ -1,1 +1,32 @@
-<p>login works!</p>
+<main class="container mx-auto " style="padding: 0 7.5em;">
+
+    <div class="container-fluid px-4">
+        <div class="card mt-4">
+            <div class="card-header">
+                <h1>Login</h1>
+            </div>
+            <div class="card-body">
+                <div class="card">
+                    <form id="login-form ">
+                        <div class="form-group mb-3">
+                            <label for="exampleInputEmail1">Username</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="usernameInput"
+                                required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Password" [(ngModel)]="passwordInput" required>
+                        </div>
+
+                        <button type="button" class="btn btn-primary" id="submitButton"
+                            (click)="login()">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
