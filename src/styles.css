@@ -1,37 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    --text-color: #222;
-    --bkg-color: #fff;
-    --btn-text-color: white;
-    --btn-bg-color: rgb(11, 88, 160);
     background-color: var(--bkg-color);
 }
 
-body.dark-theme {
-    --text-color: #eee;
-    --bkg-color: #252222;
-    --btn-text-color: rgb(46, 43, 43);
-    --btn-bg-color: rgb(20, 211, 195);
+@media (prefers-color-scheme: light) {
+    body {
+        --text-color: #222;
+        --bkg-color: #fff;
+        --btn-text-color: white;
+        --btn-bg-color: rgb(11, 88, 160);
+    }
 }
 
-h1, h2, h3, h4, h5, h6, p {
+@media (prefers-color-scheme: no-preference) {
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #252222;
+        --btn-text-color: rgb(46, 43, 43);
+        --btn-bg-color: rgb(20, 211, 195);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body.dark-theme {
+        --text-color: #eee;
+        --bkg-color: #252222;
+        --btn-text-color: rgb(46, 43, 43);
+        --btn-bg-color: rgb(20, 211, 195);
+    }
+}
+
+h1, h2, h3, h4, h5, h6, p, th {
     color: var(--text-color);
 }
 
 nav {
-    border-bottom: 2px solid #000000;
+    background-color: var(--bkg-color);
+    border-bottom: 2px solid #555;
 }
 
 footer {
-    border-top: 2px solid #000000;
+    background-color: var(--bkg-color);
+    border-top: 2px solid #555;
+    padding-bottom: 1em;
 }
 
 main {
-    /* background-color: #ffffff; */
-    margin: auto;
-    /* padding: 20px; */
-    /* border-radius: 10px; */
+    background-color: var(--bkg-color);
 }
 
 .carousel-item {
@@ -51,9 +67,9 @@ button {
     padding: 10px;
 }
 
-/* button:hover {
+button:hover {
     color: rgb(11, 88, 160);
-} */
+}
 
 /* button:active {
     border: 2px solid #888888;
@@ -69,8 +85,4 @@ select {
     border: 2px solid #888888;
     border-radius: 6px;
     padding: 4px;
-}
-
-th {
-    color: #000000;
 }
