@@ -1,6 +1,5 @@
 //need this start
 import { Component, OnInit } from '@angular/core';
-import { POINT_CONVERSION_UNCOMPRESSED } from 'constants';
 
 @Component({
   selector: 'app-home',
