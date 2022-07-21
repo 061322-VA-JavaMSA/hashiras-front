@@ -6,8 +6,8 @@ body {
 
 @media (prefers-color-scheme: light) {
     body {
-        --text-color: #222;
-        --bkg-color: #fff;
+        --text-color: #222222;
+        --bkg-color: #ffffff;
         --btn-text-color: white;
         --btn-bg-color: rgb(11, 88, 160);
     }
@@ -15,8 +15,8 @@ body {
 
 @media (prefers-color-scheme: no-preference) {
     body.dark-theme {
-        --text-color: #eee;
-        --bkg-color: #252222;
+        --text-color: #eeeeee;
+        --bkg-color: #222523;
         --btn-text-color: rgb(46, 43, 43);
         --btn-bg-color: rgb(20, 211, 195);
     }
@@ -24,7 +24,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
     body.dark-theme {
-        --text-color: #eee;
+        --text-color: #eeeeee;
         --bkg-color: #252222;
         --btn-text-color: rgb(46, 43, 43);
         --btn-bg-color: rgb(20, 211, 195);
@@ -36,13 +36,14 @@ h1, h2, h3, h4, h5, h6, p, th {
 }
 
 nav {
-    background-color: var(--bkg-color);
-    border-bottom: 2px solid #555;
+    background: #7b5683;
+    color: #eeeeee;
+    border-bottom: 2px solid #555555;
 }
 
 footer {
     background-color: var(--bkg-color);
-    border-top: 2px solid #555;
+    border-top: 2px solid #555555;
     padding-bottom: 1em;
 }
 
@@ -61,15 +62,15 @@ main {
 }
 
 button {
-    color: #000000;
+    background-color: #7b5683;
+    color: #ccc;
     border: none;
-    border-radius: 6px;
     padding: 10px;
 }
 
-button:hover {
+/* button:hover {
     color: rgb(11, 88, 160);
-}
+} */
 
 /* button:active {
     border: 2px solid #888888;
