@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 
 import { map } from 'rxjs/operators';
 import { Users } from 'src/app/models/users';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 
 @Injectable({
@@ -13,6 +14,8 @@ export class AuthService {
 
   principal: Users;
   token: String;
+  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   constructor(private http: HttpClient) { }
 
@@ -41,6 +44,7 @@ export class AuthService {
           this.principal = response.body as Users;
           localStorage.setItem('user', JSON.stringify(response.body));
           this.token = response.headers.get('Authorization') || '';
+          this.loggedIn.next(true);
           //localStorage.getItem('user')
         }
       )
@@ -50,10 +54,16 @@ export class AuthService {
   logout() {
     this.principal = null;
     this.token = '';
-    localStorage.clear()
+    localStorage.clear();
+    this.loggedIn.next(false);
+
   }
 
   getLoggedInUser() {
     return this.principal = JSON.parse(localStorage.getItem('user')) as Users;;
+  }
+
+  get isLoggedIn() {
+    return this.loggedIn.asObservable();
   }
 }
