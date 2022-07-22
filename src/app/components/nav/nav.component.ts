@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-nav',
