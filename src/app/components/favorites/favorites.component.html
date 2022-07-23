@@ -1,0 +1,46 @@
+<main class="container-fluid mx-auto">
+    <div class="input-group mt-5">
+        <div class="form-outline">
+            <label class="form-label" for="form1">Anime Search</label>
+            <input id="search-input" type="search" id="form1" class="form-control" [(ngModel)]="searchinput" />
+        </div>
+        <button id="search-button" type="button" class="btn btn-primary" (click)="searchanime()">
+            Go<i class="fas fa-search"></i>
+        </button>
+
+        <div class="alert alert-danger ms-5 {{errorBox}}" role="alert">
+            {{errorMessage}}
+        </div>
+    </div>
+    <div class="card mt-5 {{searchBox}}" *ngIf="animeInfo" style="width: 18rem;">
+        <button type="button" class="btn btn-primary mt-2" (click)="addanime()">Add to your favorites</button>
+        <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
+            Added to your favorites!
+        </div>
+        <div class="alert alert-danger mt-2 {{addError}}" role="alert">
+            Unable to add to your favorites!
+        </div>
+        <img src="{{animeInfo.images.webp.image_url }}" class="card-img-top mt-2" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{animeInfo.title}}</h5>
+            <p class="card-text">{{animeInfo.title}}</p>
+            <ul class="list-group small">
+                <li class="list-group-item">Type: {{animeInfo.type}}</li>
+                <li class="list-group-item">Episodes: {{animeInfo.episodes}}</li>
+                <li class="list-group-item">Status: {{animeInfo.status}}</li>
+                <li class="list-group-item">Aired: {{animeInfo.aired.string}}</li>
+                <li class="list-group-item">Premiered: {{animeInfo.season | titlecase }}&nbsp;{{animeInfo.year}}</li>
+                <li class="list-group-item">Broadcast: {{animeInfo.broadcast.string}} </li>
+                <li class="list-group-item">Source: {{animeInfo.Source}}</li>
+                <li class="list-group-item">Genres: <span *ngFor='let gen of animeInfo.genres'>{{gen.name}}&nbsp;</span>
+                </li>
+                <li class="list-group-item">Themes: <span
+                        *ngFor='let theme of animeInfo.themes'>{{theme.name}}&nbsp;</span>
+                </li>
+                <li class="list-group-item">Duration: {{animeInfo.duration}}</li>
+                <li class="list-group-item">Rating: {{animeInfo.rating}}</li>
+            </ul>
+        </div>
+    </div>
+
+</main>
