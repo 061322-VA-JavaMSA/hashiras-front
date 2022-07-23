@@ -13,8 +13,14 @@
         </div>
     </div>
     <div class="card mt-5 {{searchBox}}" *ngIf="animeInfo" style="width: 18rem;">
-        <button type="button" class="btn btn-primary" (click)="addanime()">Add to your favorites</button>
-        <img src="{{animeInfo.images.webp.image_url }}" class="card-img-top" alt="...">
+        <button type="button" class="btn btn-primary mt-2" (click)="addanime()">Add to your favorites</button>
+        <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
+            Added to your favorites!
+        </div>
+        <div class="alert alert-danger mt-2 {{addError}}" role="alert">
+            Unable to add to your favorites!
+        </div>
+        <img src="{{animeInfo.images.webp.image_url }}" class="card-img-top mt-2" alt="...">
         <div class="card-body">
             <h5 class="card-title">{{animeInfo.title}}</h5>
             <p class="card-text">{{animeInfo.title}}</p>

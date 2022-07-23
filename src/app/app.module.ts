@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { CustomPipe } from './pipes/custom.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     NavComponent,
     ProfileComponent,
     RegisterComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,
