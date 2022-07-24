@@ -35,7 +35,7 @@ export class FavoritesComponent implements OnInit {
     if (user) {
       this.loggedInUser = user;
     }
-    this.listInput = new Lists(0, 0, 0, 'CURRENTLY');
+    this.listInput = new Lists(0, 0, 0, 0, '');
   }
 
   /*
@@ -74,10 +74,16 @@ export class FavoritesComponent implements OnInit {
   addToList() { //adds anime to list  of logged in user and adds to database  if not already in database   
   */
   addanime() {
-    this.listInput = new Lists(this.malId, this.loggedInUser.id, 5, 'CURRENTLY');
+    this.listInput = new Lists(0, this.malId, this.loggedInUser.id, 5, 'CURRENTLY');
+    console.log(this.listInput);
     this.listServ.addList(this.listInput).subscribe(data => {
-      this.addSuccess = '';
-      this.addError = 'd-none';
+      if (data.id != 0) {
+        this.addSuccess = '';
+        this.addError = 'd-none';
+      } else {
+        this.addSuccess = 'd-none';
+        this.addError = '';
+      }
     }, error => {
       this.addSuccess = 'd-none';
       this.addError = '';

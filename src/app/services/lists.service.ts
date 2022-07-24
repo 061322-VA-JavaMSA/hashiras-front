@@ -19,9 +19,7 @@ export class ListsService {
   addList(list: Lists): Observable<any> {
     const http$ = this.http.post<any>(`${environment.apiUrl}/anime`, list);
     return http$.pipe(
-      response => {
-        return response;
-      },
+      map(response => { return response as Lists; }),
       catchError(error => {
         return throwError(error);
       })
