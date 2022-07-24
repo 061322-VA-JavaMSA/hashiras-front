@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Lists } from '../models/lists';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +11,21 @@ import { map } from 'rxjs/operators';
 export class ListsService {
   handleError: any;
   listInfo: Lists;
+  data: any;
   constructor(private http: HttpClient) { }
-
+  /*
+  addToList() { //adds anime to list  and displays success message
+  */
   addList(list: Lists): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/anime`, list).pipe(
-      //map(response => response as Lists)
-
-      //   map(response => {
-      //     this.response = response.body;
-      // })
-      map(
-        response => {
-          return response;
-        }
-      )
+    const http$ = this.http.post<any>(`${environment.apiUrl}/anime`, list);
+    return http$.pipe(
+      response => {
+        return response;
+      },
+      catchError(error => {
+        return throwError(error);
+      })
     );
   }
+
 }

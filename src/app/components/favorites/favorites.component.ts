@@ -38,16 +38,19 @@ export class FavoritesComponent implements OnInit {
     this.listInput = new Lists(0, 0, 0, 'CURRENTLY');
   }
 
+  /*
+  searchAnime() { //searches for anime and displays results if found
+  */
   searchanime() {
     this.addSuccess = 'd-none';
     this.addError = 'd-none';
+    this.errorBox = 'd-none';
     if (this.searchinput === '') {
       this.errorMessage = 'Please enter an anime title.';
       this.errorBox = '';
 
     } else {
       this.http.get(`https://api.jikan.moe/v4/anime?q=${this.searchinput}&sfw`).subscribe(data => {
-        console.log(data);
         if (data['data'].length === 0) {
           this.errorMessage = 'No anime found.';
           this.errorBox = '';
@@ -58,35 +61,28 @@ export class FavoritesComponent implements OnInit {
           this.searchBox = '';
           this.malId = this.animeInfo.mal_id;
         }
-      }
+      }, error => {
+        console.log("Error caught at Subscriber " + error);
+      },
       );
 
     }
 
   }
-  //http://localhost:8080/anime
-  // addanime() {
-  //   this.http.post(`http://localhost:8080/anime`, {
-  //     anime_id: this.malId,
-  //     user_id: this.loggedInUser.id,
-  //     user_rating: 0,
-  //     status: 'CURRENTLY'
-  //   }).subscribe(data => {
-  //     console.log(data);
-  //   }
-  //   );
-  // }
+
+  /*
+  addToList() { //adds anime to list  of logged in user and adds to database  if not already in database   
+  */
   addanime() {
-    console.log('addanime');
     this.listInput = new Lists(this.malId, this.loggedInUser.id, 5, 'CURRENTLY');
     this.listServ.addList(this.listInput).subscribe(data => {
-      if (data.status == 'CURRENTLY') {
-        this.addSuccess = '';
-
-      } else {
-        this.addError = '';
-      }
-    });
+      this.addSuccess = '';
+      this.addError = 'd-none';
+    }, error => {
+      this.addSuccess = 'd-none';
+      this.addError = '';
+    }
+    );
   }
 }
 
