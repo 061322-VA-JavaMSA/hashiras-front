@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users';
 import { AuthService } from 'src/app/services/auth.service';
 import { ListsService } from './../../services/lists.service';
 import { Lists } from 'src/app/models/lists';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
@@ -11,6 +13,7 @@ import { Lists } from 'src/app/models/lists';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit {
+  idRequest: number;
   searchinput: string;
   animeInfo: any;
   errorMessage: string;
@@ -32,39 +35,45 @@ export class FavoritesComponent implements OnInit {
   rateVisibility: String;
   spinStatus: String;
   statusVisibility: String;
+  @Input()
+  ytURL: SafeResourceUrl;
 
-  constructor(private authServ: AuthService, private http: HttpClient, private listServ: ListsService) { }
+  constructor(private authServ: AuthService, private http: HttpClient, private listServ: ListsService, public sanitizer: DomSanitizer, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.malId = 0;
     this.searchinput = '';
     this.searchBox = 'd-none';
     this.errorMessage = '';
     this.errorBox = 'd-none';
-    this.malId = 0;
     this.addSuccess = 'd-none';
     this.addError = 'd-none';
     this.spinRate = 'd-none';
     this.rateVisibility = '';
     this.spinStatus = 'd-none';
     this.statusVisibility = '';
+    this.statusInput = "CURRENTLY";
+    this.ratingInput = 0;
+    this.ytURL = '';
     let user = this.authServ.getLoggedInUser();
     if (user) {
       this.loggedInUser = user;
     }
     this.listInput = new Lists(0, 0, 0, 0, '');
-    this.statusInput = "CURRENTLY";
 
-    this.ratingInput = 0;
     this.animeSmallDetails = 'small d-none';
     this.addErrorMessage = 'Unable to add to your favorites!';
     this.StatusList = this.listServ.StatusList;
     this.RatingList = this.listServ.RatingList;
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.idRequest = +params.get('id');
+      if (this.idRequest > 0) {
+        this.searchanimebyId();
+      }
+    });
   }
 
-  /*
-  searchAnime() { //searches for anime and displays results if found
-  */
-  searchanime() {
+  reset() {
     this.addSuccess = 'd-none';
     this.addError = 'd-none';
     this.errorBox = 'd-none';
@@ -73,6 +82,16 @@ export class FavoritesComponent implements OnInit {
     this.rateVisibility = '';
     this.spinStatus = 'd-none';
     this.statusVisibility = '';
+    this.statusInput = "CURRENTLY";
+    this.ratingInput = 0;
+    this.ytURL = '';
+  }
+  /*
+  searchAnime() { //searches for anime and displays results if found
+  */
+  searchanime() {
+    this.reset();
+
     if (this.searchinput === '') {
       this.errorMessage = 'Please enter an anime title.';
       this.errorBox = '';
@@ -89,7 +108,10 @@ export class FavoritesComponent implements OnInit {
           this.animeInfo = data['data'][0];
           this.searchBox = '';
           this.malId = this.animeInfo.mal_id;
-          this.animeSmallDetails = 'small   ';
+
+          this.ytURL = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.animeInfo.trailer.youtube_id}?enablejsapi=1&wmode=opaque&autoplay=1`);
+
+          this.animeSmallDetails = 'small';
           this.listServ.getListByUserIdAndAnimeId(this.loggedInUser.id, this.malId).subscribe(data => {
             this.listInput = data as Lists;
             this.ratingInput = this.listInput.user_rating;
@@ -115,6 +137,54 @@ export class FavoritesComponent implements OnInit {
 
   }
 
+  searchanimebyId() {
+    this.reset();
+    //this.idRequest =
+    if (this.idRequest === 0) {
+      this.errorMessage = 'Please enter an anime title.';
+      this.errorBox = '';
+
+    } else {
+      console.log(`https://api.jikan.moe/v4/anime/${this.idRequest}`);
+      this.http.get(`https://api.jikan.moe/v4/anime/${this.idRequest}`).subscribe(data => {
+        if (data['data'].length === 0) {
+          this.errorMessage = 'No anime found.';
+          this.errorBox = '';
+          this.searchBox = 'd-none';
+          this.animeSmallDetails = 'small d-none';
+
+        } else {
+          this.animeInfo = data['data'];
+          this.searchBox = '';
+          this.malId = this.animeInfo.mal_id;
+
+          this.ytURL = this.sanitizer.bypassSecurityTrustResourceUrl(`https://www.youtube.com/embed/${this.animeInfo.trailer.youtube_id}?enablejsapi=1&wmode=opaque&autoplay=1`);
+
+          this.animeSmallDetails = 'small';
+          this.listServ.getListByUserIdAndAnimeId(this.loggedInUser.id, this.malId).subscribe(data => {
+            this.listInput = data as Lists;
+            this.ratingInput = this.listInput.user_rating;
+            this.statusInput = this.listInput.status;
+          }, error => {
+            //404 not found
+            if (error.status == 404) {
+              this.listInput.id = -1;
+            }
+
+          }
+          );
+        }
+      }, error => {
+        this.errorMessage = 'No anime found.';
+        this.errorBox = '';
+        this.searchBox = 'd-none';
+        this.animeSmallDetails = 'small d-none';
+      },
+      );
+
+    }
+
+  }
   /*
   addToList() { //adds anime to list  of logged in user and adds to database  if not already in database   
   */
@@ -168,6 +238,27 @@ export class FavoritesComponent implements OnInit {
     this.listServ.updateStatusById(this.listInput.id, this.statusInput).subscribe(data => {
       this.spinStatus = 'd-none';
       this.statusVisibility = '';
+    }, error => {
+      this.spinStatus = 'd-none';
+      this.statusVisibility = '';
+    }
+    );
+  }
+
+  deleteById() {
+    if (this.listInput.id <= 0) {
+      return false;
+    }
+    this.spinStatus = '';
+    this.statusVisibility = 'd-none';
+    this.listServ.deleteById(this.listInput.id).subscribe(data => {
+      this.spinStatus = 'd-none';
+      this.statusVisibility = '';
+      this.listInput = new Lists(0, 0, 0, 0, '');
+      this.addSuccess = 'd-none';
+      this.addError = 'd-none';
+      // this.animeInfo = null;
+      // this.reset();
     }, error => {
       this.spinStatus = 'd-none';
       this.statusVisibility = '';
