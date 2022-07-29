@@ -22,7 +22,8 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link clickable" style="color: var(--text-color);">Logout</a>
+            <a class="nav-link clickable" *ngIf="loggedInUser" style="color: var(--text-color);" href="#"
+                (click)="logout()">Logout</a>
         </li>
     </ul>
 </nav>
