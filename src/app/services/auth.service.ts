@@ -32,7 +32,7 @@ export class AuthService {
     let credentials = `username=${username}&password=${password}`;
 
     // environment allows us to easily switch between dev url and prod url
-    return this.http.post(`${environment.apiUrl}/auth`, credentials, {
+    return this.http.post(`${environment.serverApiUrl}/auth`, credentials, {
       headers: {
         // we're leveraging form params and not exposing credentials to the url
         'Content-Type': 'application/x-www-form-urlencoded'

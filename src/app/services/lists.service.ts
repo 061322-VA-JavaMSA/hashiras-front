@@ -4,6 +4,7 @@ import { Lists } from '../models/lists';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { AnimeList, List } from '../models/lists';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class ListsService {
   addToList() { //adds anime to list  and displays success message
   */
   addList(list: Lists): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/anime`, list).pipe(
+    return this.http.post<any>(`${environment.serverApiUrl}/anime`, list).pipe(
       map(response => { return response as Lists; }),
       catchError(error => {
         return throwError(error);
@@ -47,7 +48,7 @@ export class ListsService {
   }
 
   getListByUserIdAndAnimeId(user_id: number, anime_id: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/anime/user/${user_id}/anime/${anime_id}`).pipe(
+    return this.http.get(`${environment.serverApiUrl}/anime/user/${user_id}/anime/${anime_id}`).pipe(
       map(response => { return response as Lists; }),
       catchError(error => {
         return throwError(error);
@@ -57,7 +58,7 @@ export class ListsService {
 
   updateRatingById(id: number, user_rating: number): Observable<any> {
 
-    return this.http.put(`${environment.apiUrl}/anime/${id}/rate`, `user_rating=${user_rating}`, {
+    return this.http.put(`${environment.serverApiUrl}/anime/${id}/rate`, `user_rating=${user_rating}`, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }).pipe(
       response => { return response; },
@@ -69,7 +70,7 @@ export class ListsService {
 
   updateStatusById(id: number, status: String): Observable<any> {
 
-    return this.http.put(`${environment.apiUrl}/anime/${id}/status`, `status=${status}`, {
+    return this.http.put(`${environment.serverApiUrl}/anime/${id}/status`, `status=${status}`, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }).pipe(
       response => { return response; },
@@ -81,12 +82,44 @@ export class ListsService {
 
 
   deleteById(id: number): Observable<any> {
-    console.log(`${environment.apiUrl}/anime/${id}`);
-    return this.http.delete(`${environment.apiUrl}/anime/${id}`).pipe(
+    console.log(`${environment.serverApiUrl}/anime/${id}`);
+    return this.http.delete(`${environment.serverApiUrl}/anime/${id}`).pipe(
       response => { return response; },
       catchError(error => {
         return throwError(error);
       })
     );
   }
+}
+export class AnimeListService {
+  // constructor injection
+  constructor(private http: HttpClient) { }
+  public getListByUserIdAndStatus(user_id,status): Observable<List[]>{
+    return this.http.get(`${environment.serverApiUrl}/anime/user/${user_id}/status/${status}`).pipe(
+      map(
+            response => response as List[]
+      )
+    );
+  }
+  public searchList(anime_id): Observable<List[]>{
+      return this.http.get(`${environment.animeApiUrl}/anime/${anime_id}`).pipe(
+        map(
+          response => response as List[]
+        )
+      );
+    }
+    public browseBySeason(year, season): Observable<List[]>{
+      return this.http.get(`${environment.animeApiUrl}/seasons/${year}/${season}`).pipe(
+        map(
+          response => response as List[]
+        )
+      );
+    }
+    public browseByGenre(genre): Observable<List[]>{
+      return this.http.get(`${environment.animeApiUrl}/anime/genre/${genre}`).pipe(
+        map(
+          response => response as List[]
+        )
+      );
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Lists } from 'src/app/models/lists';
+import { List } from 'src/app/models/lists';
 import { Users } from 'src/app/models/users';
 import { AnimeListService } from 'src/app/services/lists.service';
 
@@ -10,7 +10,7 @@ import { AnimeListService } from 'src/app/services/lists.service';
 })
 export class ListsComponent implements OnInit {
 
-  lists: Lists[];
+  lists: List[];
   infoList: any;
   user_id: number;
   anime_id: number;
