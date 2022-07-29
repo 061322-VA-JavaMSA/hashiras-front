@@ -32,6 +32,7 @@ const routes: Routes = [
     path: 'favorites',
     component: FavoritesComponent,
   },
+  { path: 'favorites/:id', component: FavoritesComponent }
 ];
 
 @NgModule({

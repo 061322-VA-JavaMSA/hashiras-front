@@ -78,4 +78,15 @@ export class ListsService {
       })
     );
   }
+
+
+  deleteById(id: number): Observable<any> {
+    console.log(`${environment.apiUrl}/anime/${id}`);
+    return this.http.delete(`${environment.apiUrl}/anime/${id}`).pipe(
+      response => { return response; },
+      catchError(error => {
+        return throwError(error);
+      })
+    );
+  }
 }
