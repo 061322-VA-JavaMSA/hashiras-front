@@ -13,6 +13,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { CustomPipe } from './pipes/custom.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,9 @@ import {  HttpClientModule } from '@angular/common/http';
     LoginComponent,
     NavComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    FavoritesComponent,
+    CustomPipe
   ],
   imports: [
     BrowserModule,

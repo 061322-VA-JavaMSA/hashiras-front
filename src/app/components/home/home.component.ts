@@ -1,5 +1,6 @@
-//need this start
 import { Component, OnInit } from '@angular/core';
+import { AnimeList, Lists } from 'src/app/models/lists';
+import { AnimelistService } from 'src/app/services/animelist.service';
 
 @Component({
   selector: 'app-home',
@@ -8,25 +9,51 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  home: AnimeList[];
+
+  image: any;
+  title: any;
+  score: number;
+  trailer: any;
+  year: number;
+  season: string;
+  yearSelect: any;
+  seasonSelect: any;
+
+  constructor(private als: AnimelistService) { }
 
   ngOnInit(): void {
+    this.image = '';
+    this.title = '';
+    this.score = 0;
+    this.trailer = '';
+    this.year = 0;
+    this.season = '';
+    this.yearSelect = '';
+    this.seasonSelect = '';
   }
-}
-//need this end
-
-async function getCurrentSeason(data){
-  let response = await fetch('https://api.jikan.moe/v4/seasons/now', {
-    method: 'GET',
-    credentials: 'same-origin'
-  });
-  if(response.ok){
-    let data = await response.json();
-
-    console.log(response);
-
-    // populateTable(data);
-  } else {
-    console.log('error');
+  browseBySeason() {
+    // this.year = 2022;
+    // this.season = 'summer';
+    console.log(this.yearSelect);
+    console.log(this.seasonSelect);
+    this.als.browseBySeason(this.yearSelect, this.seasonSelect).subscribe((data: Lists[]) => {
+      this.home = []
+      console.log(data);
+      for (const item of data['data']) {
+        this.home.push(
+          new AnimeList(
+            item['images']['jpg']['image_url'],
+            item['title'],
+            item['score'],
+            item['trailer']['url'],
+            0,
+            ''
+          ));
+      };
+    }, error => {
+      console.log(error);
+    }
+    );
   }
 }

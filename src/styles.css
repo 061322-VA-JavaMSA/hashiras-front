@@ -5,7 +5,7 @@ body {
 }
 
 @media (prefers-color-scheme: light) {
-    body {
+    body.light-theme {
         --text-color: #222222;
         --bkg-color: #ffffff;
         --btn-text-color: white;
@@ -31,18 +31,20 @@ body {
     }
 }
 
-h1, h2, h3, h4, h5, h6, p, th {
+h1, h2, h3, h4, h5, h6, p, th, td {
     color: var(--text-color);
 }
 
 nav {
-    background: #7b5683;
+    /* background: #7b5683; */
+    background: #A17CED;
     color: #eeeeee;
     border-bottom: 2px solid #555555;
 }
 
 footer {
-    background-color: var(--bkg-color);
+    background: #252222;
+    color: #eeeeee;
     border-top: 2px solid #555555;
     padding-bottom: 1em;
 }
@@ -62,8 +64,9 @@ main {
 }
 
 button {
-    background-color: #7b5683;
-    color: #ccc;
+    /* background-color: #7b5683; */
+    background-color: #A17CED;
+    color: #eee;
     border: none;
     padding: 10px;
 }
@@ -86,4 +89,25 @@ select {
     border: 2px solid #888888;
     border-radius: 6px;
     padding: 4px;
+}
+
+thead {
+    background-color: #1B1412;
+    color: #DCC237;
+    border-radius: 4px;
+    padding: .5em;
+    margin-left: 1em;    
+}
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+    padding: 1em;
+    margin: .7em;
+}
+
+td {
+    padding: .5em;
+    text-align: center;
 }
