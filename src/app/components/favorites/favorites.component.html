@@ -49,8 +49,12 @@
                             <li class="list-group-item">Rating: {{animeInfo.rating}}</li>
                         </ul>
                         <div>
-                            <button type="button" class="btn btn-primary mt-2" (click)="addanime()">Add to your
+                            <button type="button" class="btn btn-primary mt-2" (click)="addanime()"
+                                *ngIf="listInput.id < 1">Add to your
                                 favorites</button>
+                            <button type="button" class="btn btn-primary mt-2" (click)="deleteById()"
+                                *ngIf="listInput.id > 0">Delete from
+                                your favorites</button>
                             <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
                                 Added to your favorites!
                             </div>
