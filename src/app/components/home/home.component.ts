@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimeList, Lists } from 'src/app/models/lists';
-import { AnimeListService } from 'src/app/services/lists.service';
+import { AnimelistService } from 'src/app/services/animelist.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ import { AnimeListService } from 'src/app/services/lists.service';
 })
 export class HomeComponent implements OnInit {
 
-  home:AnimeList[];
+  home: AnimeList[];
 
   image: any;
   title: any;
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   yearSelect: any;
   seasonSelect: any;
 
-  constructor(private als: AnimeListService) { }
+  constructor(private als: AnimelistService) { }
 
   ngOnInit(): void {
     this.image = '';
@@ -43,13 +43,13 @@ export class HomeComponent implements OnInit {
       for (const item of data['data']) {
         this.home.push(
           new AnimeList(
-          item['images']['jpg']['image_url'],
-          item['title'],
-          item['score'],
-          item['trailer']['url'],
-          0,
-          ''   
-        ));
+            item['images']['jpg']['image_url'],
+            item['title'],
+            item['score'],
+            item['trailer']['url'],
+            0,
+            ''
+          ));
       };
     }, error => {
       console.log(error);
