@@ -10,11 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
-
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { FavoritesComponent } from './components/favorites/favorites.component';
-import { CustomPipe } from './pipes/custom.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,15 +22,13 @@ import { CustomPipe } from './pipes/custom.pipe';
     LoginComponent,
     NavComponent,
     ProfileComponent,
-    RegisterComponent,
-    FavoritesComponent,
-    CustomPipe
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

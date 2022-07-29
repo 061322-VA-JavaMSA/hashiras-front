@@ -1,16 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
+import { AnimeListService } from "./lists.service";
 
-import { ListsService } from './lists.service';
+describe('AnimeListService', () => {
+    let service: AnimeListService;
+    
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(AnimeListService);
+    });
 
-describe('ListsService', () => {
-  let service: ListsService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(ListsService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });
