@@ -13,8 +13,7 @@
         <thead>
             <tr>
                 <!-- <th>Anime Id</th> -->
-                <th id="first">User </th>
-                <th>Anime Image</th>
+                <th id="first">Anime Image</th>
                 <th>Anime Title</th>
                 <th>User Rating</th>
                 <th>Average Rating</th>
@@ -26,7 +25,6 @@
             <tr *ngFor="let list of lists">
                 <!-- <td>{{list.anime_id}}</td> -->
 
-                <td>{{list.user.username}}</td>
                 <td><a routerLink="/favorites/{{list.anime_id}}"><img src="{{list.image}}" alt="{{list.image}}"
                             width="100px" height="100px"></a></td>
                 <td><a routerLink="/favorites/{{list.anime_id}}">{{list.title}}</a></td>
