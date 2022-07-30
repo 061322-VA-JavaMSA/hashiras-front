@@ -27,9 +27,9 @@
                 <!-- <td>{{list.anime_id}}</td> -->
 
                 <td>{{list.user.username}}</td>
-                <td><a class="nav-link" routerLink="/favorites/{{list.anime_id}}" style="color: var(--text-color);"><img
-                            src="{{list.image}}" alt="{{list.image}}" width="100px" height="100px"></a></td>
-                <td>{{list.title}}</td>
+                <td><a routerLink="/favorites/{{list.anime_id}}"><img src="{{list.image}}" alt="{{list.image}}"
+                            width="100px" height="100px"></a></td>
+                <td><a routerLink="/favorites/{{list.anime_id}}">{{list.title}}</a></td>
                 <td>{{list.user_rating}}</td>
                 <td>{{list.score}}</td>
                 <td><a href="{{list.trailer}}" *ngIf="list.trailer">Watch Trailer</a><span *ngIf="!list.trailer">No
