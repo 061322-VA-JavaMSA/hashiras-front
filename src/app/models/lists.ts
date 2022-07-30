@@ -27,13 +27,15 @@ export class List {
     }
 }
 export class AnimeList {
+    id: number;
     image: any;
     title: string;
     score: number;
     trailer: any;
     year: number;
     season: String;
-    constructor(image: any, title: string, score: number, trailer: any, year: number, season: String) {
+    constructor(id: number, image: any, title: string, score: number, trailer: any, year: number, season: String) {
+        this.id = id;
         this.image = image;
         this.title = title;
         this.score = score;

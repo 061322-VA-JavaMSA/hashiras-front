@@ -63,7 +63,10 @@
             </thead>
             <tbody id="CurrentList" *ngIf="home">
                 <tr *ngFor="let list of home">
-                    <td><img src="{{list.image}}" alt="{{list.image}}" width="100px" height="100px"></td>
+
+
+                    <td> <a class="nav-link" routerLink="/favorites/{{list.id}}" style="color: var(--text-color);"><img
+                                src="{{list.image}}" alt="{{list.image}}" width="100px" height="100px"> </a></td>
                     <td>{{list.title}}</td>
                     <td>{{list.score}}</td>
                     <td><a href="{{list.trailer}}" *ngIf="list.trailer">Watch Trailer</a><span *ngIf="!list.trailer">No
