@@ -45,6 +45,7 @@ button.small {
     font-size: -webkit-xxx-large;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    padding: .5em;
 }
 
 #fancybox-frame {
