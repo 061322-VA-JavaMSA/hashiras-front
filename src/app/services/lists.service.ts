@@ -4,7 +4,6 @@ import { Lists } from '../models/lists';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { AnimeList, List } from '../models/lists';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +56,6 @@ export class ListsService {
   }
 
   updateRatingById(id: number, user_rating: number): Observable<any> {
-
     return this.http.put(`${environment.serverApiUrl}/anime/${id}/rate`, `user_rating=${user_rating}`, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }).pipe(
@@ -69,7 +67,6 @@ export class ListsService {
   }
 
   updateStatusById(id: number, status: String): Observable<any> {
-
     return this.http.put(`${environment.serverApiUrl}/anime/${id}/status`, `status=${status}`, {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     }).pipe(
@@ -80,9 +77,7 @@ export class ListsService {
     );
   }
 
-
   deleteById(id: number): Observable<any> {
-    console.log(`${environment.serverApiUrl}/anime/${id}`);
     return this.http.delete(`${environment.serverApiUrl}/anime/${id}`).pipe(
       response => { return response; },
       catchError(error => {

@@ -18,8 +18,6 @@ export class List {
         this.user_id = user_id;
         this.title = title;
         this.image = image;
-        // this.year = year;
-        // this.season = season;
         this.user_rating = user_rating;
         this.score = score;
         this.trailer = trailer;
