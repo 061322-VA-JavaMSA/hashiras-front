@@ -6,6 +6,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,17 +23,17 @@ const routes: Routes = [
   },
   {
     path: 'lists',
-    component: ListsComponent,
+    component: ListsComponent, canActivate: [AuthGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent,
+    component: ProfileComponent, canActivate: [AuthGuard]
   },
   {
     path: 'favorites',
-    component: FavoritesComponent,
+    component: FavoritesComponent, canActivate: [AuthGuard]
   },
-  { path: 'favorites/:id', component: FavoritesComponent }
+  { path: 'favorites/:id', component: FavoritesComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

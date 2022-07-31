@@ -5,8 +5,8 @@
             <div class="row d-flex justify-content-center">
                 <div class="input-group mt-5 d-flex justify-content-center">
                     <div class="form-outline me-2">
-                        <input id="search-input" type="search" placeholder="Anime Search" id="form1" class="form-control"
-                            [(ngModel)]="searchinput" />
+                        <input id="search-input" type="search" placeholder="Anime Search" id="form1"
+                            class="form-control" [(ngModel)]="searchinput" />
                     </div>
 
                     <button id="search-button" type="button" class="btn btn-primary rounded" (click)="searchanime()">
@@ -50,8 +50,12 @@
                                 <li class="list-group-item">Rating: {{animeInfo.rating}}</li>
                             </ul>
                             <div>
-                                <button type="button" class="btn btn-primary mt-2" (click)="addanime()">Add to your
+                                <button type="button" class="btn btn-primary mt-2" (click)="addanime()"
+                                    *ngIf="listInput.id < 1">Add to your
                                     favorites</button>
+                                <button type="button" class="btn btn-primary mt-2" (click)="deleteById()"
+                                    *ngIf="listInput.id > 0">Delete from
+                                    your favorites</button>
                                 <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
                                     Added to your favorites!
                                 </div>
