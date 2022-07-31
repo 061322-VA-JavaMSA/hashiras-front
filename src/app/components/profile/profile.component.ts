@@ -19,9 +19,9 @@ export class ProfileComponent implements OnInit {
     let user = this.authServ.getLoggedInUser();
     this.sendString = '';
     this.updateForm = this.formBuilder.group({
-      fname: ['charles', Validators.required],
-      lname: ['x', Validators.required],
-      email: ['test@email.com', Validators.required],
+      fname: [user.fname, Validators.required],
+      lname: [user.lname, Validators.required],
+      email: [user.email, Validators.required],
       password: ['', Validators.required],
       id: [user.id],
     });
