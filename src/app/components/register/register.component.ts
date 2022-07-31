@@ -36,37 +36,18 @@ export class RegisterComponent implements OnInit {
  get f() {return this.registerForm.controls; }
 
   onSubmit() {
-    console.log('here');
-    console.log(this.registerForm);
+ 
 
     this.submitted = true;
     
-    // if (this.registerForm.invalid) {
-    //   return;
-    // }
+ 
     this.http.post('http://localhost:8080/users', this.registerForm.value).subscribe(
       data => {
         console.log(data);
       }
-    );
-    // this.loading = true;
-    // this.userService.registerUser(this.newUser)
-      
-    //     .subscribe({
-    //       next: ()  => {  this.loading = false,
-    //         this.submitted = false;
-    //         this.registerForm.reset();
-            
-    //       },
-    //       error: err => {
-    //         console.log(err);
-    //         this.loading = false;
-    //       }
-          
-    //     });
+ 
 
 }
 
  
 }
-

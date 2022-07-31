@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 export class NavComponent implements OnInit {
   @Input() loggedInUser: Users;
   isLoggedIn$: Observable<boolean>;
-
   constructor(private authServ: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -21,9 +20,11 @@ export class NavComponent implements OnInit {
     if (user) {
       this.loggedInUser = user;
     }
+
   }
 
   ngAfterContentInit(): void {
+
     this.isLoggedIn$.subscribe(res => {
       if (res) {
         this.toggleMenu();
