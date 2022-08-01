@@ -3,6 +3,7 @@ import { Users } from 'src/app/models/users';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -42,7 +43,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
 
-    this.http.post('http://localhost:8080/users', this.registerForm.value).subscribe(
+    this.http.post(`${environment.serverApiUrl}/users`, this.registerForm.value).subscribe(
       data => {
         this.router.navigate(['']);
       }

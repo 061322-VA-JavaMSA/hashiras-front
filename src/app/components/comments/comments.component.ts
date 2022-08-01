@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CommentService } from 'src/app/services/comment.service';
 import { Comment } from '../../models/comment';
+import { FavoritesComponent } from '../favorites/favorites.component';
 
 @Component({
   selector: 'app-comments',
@@ -11,57 +13,44 @@ import { Comment } from '../../models/comment';
 })
 export class CommentsComponent implements OnInit {
 
-  comment: Comment[];
-  animeId : number;
-  userId: number;
+  comments: Comment[];
+  newComment: Comment;
+  animeId: number;
+  userId: string;
 
 
-  constructor(private http: HttpClient) {
-  }
+
+  constructor(private http: HttpClient, private cs: CommentService, private fav: FavoritesComponent) { }
+  
     
   
   
   submit(comment : string): void {
-    console.log(comment)
-
+    this.newComment = new Comment(this.animeId, this.userId, comment);
+    this.cs.addComment(this.newComment)
   }
 
   ngOnInit(): void {
-    // this.comment = new Comment(1, 1, "This is a comment");
-    // this.loadComments(1);
-    this.animeId = 38000;
-    this.userId = 1;
-    // this.getComments().subscribe(
-    //   (comments) => {
-    //     this.comment = comments;
-    //   })
+      this.animeId = this.fav.animeInfo.mal_id;
+      this.userId = this.fav.loggedInUser.username;
+      this.displayComments(this.animeId);
   }
 
-  loadComments(animeId : number): void {
-    // this.getComments().subscribe(
-    //   (comments) => {
-    //     this.comment = comments;
-    //   }
-    // )
+  displayComments(animeId: number): void {
+    this.cs.getCommentsByAnimeId(animeId).subscribe(data => {
+      this.getComments(data);
+    }
+    );
+  }
+  getComments(data: any) {
+    this.comments = data;
+    console.log(this.comments);
+    // this.comment.forEach(element => {
+    //   console.log(element);
+    //   this.username = element['author']['username'];
+    //   this.commentText = element['comment'];
+    // });
   }
 
 
-  getComments() : Observable<Comment[]> {
-  //   return this.http.get(`localhost:8080/comment/${this.animeId}`).subscribe( 
-  //     data => {
-
-
-  //     }, console.error();
-      
-  //     // map(
-  //     //   response => response as Comment[]
-  //     // )
-  //   );
-
-  return this.http.get(`http://localhost:8080/comment/${this.animeId}`).pipe(
-    map(
-      response => response as Comment[]
-    )
-  );
-  }
 }

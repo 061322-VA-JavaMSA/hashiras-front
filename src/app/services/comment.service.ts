@@ -16,4 +16,14 @@ export class CommentService {
       )
     );
   }
+
+  addComment(comment: any): Observable<any> {
+    console.log(comment)
+    return this.http.post<Comment>(`${environment.serverApiUrl}/comment`, comment).pipe(
+      map(
+        response => {return response as Comment}
+      )
+    );
+    console.log('done')
+  }
 }

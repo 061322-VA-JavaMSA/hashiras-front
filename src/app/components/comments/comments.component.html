@@ -7,22 +7,25 @@
                 <div
                     class="commented-section mt-2">
                     <div class="d-flex flex-row align-items-center commented-user">
-                        <!-- <table id="Anime">
+                        <table id="Anime">
                             <thead>
                                 <tr>
-                                     <th>Anime Id</th> 
                                     <th>User </th>
-                                    <th>Anime Image</th>
-                                    <th>Anime Title</th>
+                                    <th>Comment</th>
                                 </tr>
-                            </thead>    
-                            <tbody *ngIf="comment">
-                                <tr *ngFor="let comment of comment">
-                                    <td>{{comment.user.username}}</td>
-                                    <td>{{comment.comment}}</td>
+                            </thead>   
+                            
+                            <!-- anime_id: 38000
+author: {id: 1, username: 'charles', password: '12345', fname: 'charles', lname: 'x', …}
+comment: "Demon Slayer is the bee's fish's knees"
+id: 2 -->
+                            <tbody *ngIf="comments">
+                                <tr *ngFor="let com of comments">
+                                    <td>{{com.author['username']}}</td>
+                                    <td>{{com.comment}}</td>
                                 </tr>
                             </tbody>        
-                        </table> -->
+                        </table>
                     <div class="comment-text-sm"><span></span></div>
 
         </div>

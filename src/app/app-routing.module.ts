@@ -6,11 +6,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
-<<<<<<< HEAD
-import { CommentsComponent } from './components/comments/comments.component';
-=======
 import { AuthGuard } from './shared/auth.guard';
->>>>>>> 33488c7d55133c6722ad6973d94c34d9c89fce8f
 
 const routes: Routes = [
   {
@@ -37,14 +33,7 @@ const routes: Routes = [
     path: 'favorites',
     component: FavoritesComponent, canActivate: [AuthGuard]
   },
-<<<<<<< HEAD
-  { path: 'favorites/:id', component: FavoritesComponent },
-  { path: 'comments', 
-    component: CommentsComponent,
-  },
-=======
   { path: 'favorites/:id', component: FavoritesComponent, canActivate: [AuthGuard] }
->>>>>>> 33488c7d55133c6722ad6973d94c34d9c89fce8f
 ];
 
 @NgModule({
