@@ -18,8 +18,6 @@ export class List {
         this.user_id = user_id;
         this.title = title;
         this.image = image;
-        // this.year = year;
-        // this.season = season;
         this.user_rating = user_rating;
         this.score = score;
         this.trailer = trailer;
@@ -27,13 +25,15 @@ export class List {
     }
 }
 export class AnimeList {
+    id: number;
     image: any;
     title: string;
     score: number;
     trailer: any;
     year: number;
     season: String;
-    constructor(image: any, title: string, score: number, trailer: any, year: number, season: String) {
+    constructor(id: number, image: any, title: string, score: number, trailer: any, year: number, season: String) {
+        this.id = id;
         this.image = image;
         this.title = title;
         this.score = score;

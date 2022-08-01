@@ -19,6 +19,15 @@ export class AnimelistService {
       )
     );
   }
+
+
+  public getListByUserId(user_id): Observable<List[]> {
+    return this.http.get(`${environment.serverApiUrl}/anime/user/${user_id}`).pipe(
+      map(
+        response => response as List[]
+      )
+    );
+  }
   public searchList(anime_id): Observable<List[]> {
     return this.http.get(`${environment.animeApiUrl}/anime/${anime_id}`).pipe(
       map(

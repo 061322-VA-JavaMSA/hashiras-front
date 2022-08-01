@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
       for (const item of data['data']) {
         this.home.push(
           new AnimeList(
+            item['mal_id'],
             item['images']['jpg']['image_url'],
             item['title'],
             item['score'],

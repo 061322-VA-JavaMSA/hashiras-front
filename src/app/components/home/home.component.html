@@ -1,76 +1,80 @@
-<main class="container-fluid mx-auto">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="../../../assets/images/TheHashiras.jpg"
-                    alt="Kimetsu no Yaiba(Demon Slayer)">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../../../assets/images/slime.jpg"
-                    alt="That Time I got Reincarnated as a Slime">
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../../../assets/images/AJR.jpg" alt="A Jobless Reincarnation">
+<div id="body">
+    <main class="container-fluid mx-auto">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="../../../assets/images/TheHashiras.jpg"
+                        alt="Kimetsu no Yaiba(Demon Slayer)">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../../assets/images/slime.jpg"
+                        alt="That Time I got Reincarnated as a Slime">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../../../assets/images/AJR.jpg" alt="A Jobless Reincarnation">
+                </div>
             </div>
         </div>
-    </div>
-    <!-- <h1 class="display-1 text-center" id="welcome" [class]="blue">Welcome!</h1> -->
-    <h1 class="display-1 text-center" id="welcome">Hashira's Lists!</h1>
-    <div class="Seasons">
-        <h3 class="d-flex justify-content-center">Browse by Season</h3>
-        <div class="d-flex justify-content-center">
-            <select name="year" id="year" [(ngModel)]="yearSelect">
-                <option value="2022">2022</option>
-                <option value="2021">2021</option>
-                <option value="2020">2020</option>
-                <option value="2019">2019</option>
-                <option value="2018">2018</option>
-                <option value="2017">2017</option>
-                <option value="2016">2016</option>
-                <option value="2015">2015</option>
-                <option value="2014">2014</option>
-                <option value="2013">2013</option>
-                <option value="2012">2012</option>
-                <option value="2011">2011</option>
-                <option value="2010">2010</option>
-                <option value="2009">2009</option>
-                <option value="2008">2008</option>
-                <option value="2007">2007</option>
-                <option value="2006">2006</option>
-                <option value="2005">2005</option>
-                <option value="2004">2004</option>
-                <option value="2003">2003</option>
-                <option value="2002">2002</option>
-                <option value="2001">2001</option>
-                <option value="2000">2000</option>
-            </select>
-            <select name="season" id="season" [(ngModel)]="seasonSelect">
-                <option value="winter">Winter</option>
-                <option value="spring">Spring</option>
-                <option value="summer">Summer</option>
-                <option value="fall">Fall</option>
-            </select>
-            <button class="Search" (click)="browseBySeason()">Search</button>
+        <!-- <h1 class="display-1 text-center" id="welcome" [class]="blue">Welcome!</h1> -->
+        <h1 class="display-1 text-center" id="welcome">Hashira's Lists!</h1>
+        <div class="Seasons">
+            <h3 class="d-flex justify-content-center">Browse by Season</h3>
+            <div class="d-flex justify-content-center">
+                <select name="year" id="year" [(ngModel)]="yearSelect">
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                    <option value="2007">2007</option>
+                    <option value="2006">2006</option>
+                    <option value="2005">2005</option>
+                    <option value="2004">2004</option>
+                    <option value="2003">2003</option>
+                    <option value="2002">2002</option>
+                    <option value="2001">2001</option>
+                    <option value="2000">2000</option>
+                </select>
+                <select name="season" id="season" [(ngModel)]="seasonSelect">
+                    <option value="winter">Winter</option>
+                    <option value="spring">Spring</option>
+                    <option value="summer">Summer</option>
+                    <option value="fall">Fall</option>
+                </select>
+                <button class="Search" (click)="browseBySeason()">Search</button>
+            </div>
+            <table id="Current Season">
+                <thead>
+                    <tr>
+                        <th>Anime Image</th>
+                        <th>Anime Title</th>
+                        <th>Average Rating</th>
+                        <th>Trailer</th>
+                    </tr>
+                </thead>
+                <tbody id="CurrentList" *ngIf="home">
+                    <tr *ngFor="let list of home">    
+                        <td> <a routerLink="/favorites/{{list.id}}"><img src="{{list.image}}" alt="{{list.image}}"
+                                    width="100px" height="100px"> </a></td>
+                        <td><a routerLink="/favorites/{{list.id}}">{{list.title}}</a></td>
+                        <td>{{list.score}}</td>
+                        <td><a href="{{list.trailer}}" *ngIf="list.trailer">Watch Trailer</a><span *ngIf="!list.trailer">No
+                                Trailer</span></td>
+                    </tr>
+                </tbody>
+                <br>
+                <br>
+            </table>
         </div>
-        <table id="Current Season">
-            <thead>
-                <tr>
-                    <th>Anime Image</th>
-                    <th>Anime Title</th>
-                    <th>Average Rating</th>
-                    <th>Trailer</th>
-                </tr>
-            </thead>
-            <tbody id="CurrentList" *ngIf="home">
-                <tr *ngFor="let list of home">
-                    <td><img src="{{list.image}}" alt="{{list.image}}" width="100px" height="100px"></td>
-                    <td>{{list.title}}</td>
-                    <td>{{list.score}}</td>
-                    <td><a href="{{list.trailer}}" *ngIf="list.trailer">Watch Trailer</a><span *ngIf="!list.trailer">No
-                            Trailer</span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</main>
-<script src="../../../assets/scripts/home.js"></script>
+    </main>
+</div>

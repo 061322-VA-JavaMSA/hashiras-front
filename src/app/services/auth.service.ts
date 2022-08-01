@@ -44,6 +44,7 @@ export class AuthService {
           this.principal = response.body as Users;
           localStorage.setItem('user', JSON.stringify(response.body));
           this.token = response.headers.get('Authorization') || '';
+          localStorage.setItem('token', JSON.stringify(this.token));
           this.loggedIn.next(true);
           //localStorage.getItem('user')
         }
@@ -65,5 +66,9 @@ export class AuthService {
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
+  }
+
+  IsLoggedIn() {
+    return !!localStorage.getItem('token');
   }
 }

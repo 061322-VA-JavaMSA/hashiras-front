@@ -15,12 +15,19 @@
             <button (click)="toggleDarkTheme()">Light/Dark</button>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="login" style="color: var(--text-color);">Login</a>
+            <a class="nav-link" routerLink="login" *ngIf="!loggedInUser" style="color: var(--text-color);">Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="register" style="color: var(--text-color);">Register</a>
+            <a class="nav-link" routerLink="register" *ngIf="!loggedInUser"
+                style="color: var(--text-color);">Register</a>
         </li>
-
+        <li *ngIf="loggedInUser" class="nav-item">
+            <a class="nav-link">{{loggedInUser.username}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" *ngIf="loggedInUser" routerLink="profile" style="color: var(--text-color);">Your
+                Profile</a>
+        </li>
         <li class="nav-item">
             <a class="nav-link clickable" *ngIf="loggedInUser" style="color: var(--text-color);" href="#"
                 (click)="logout()">Logout</a>
