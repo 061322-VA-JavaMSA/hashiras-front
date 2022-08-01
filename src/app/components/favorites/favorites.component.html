@@ -1,46 +1,205 @@
-<main class="container-fluid mx-auto">
-    <div class="input-group mt-5">
-        <div class="form-outline">
-            <label class="form-label" for="form1">Anime Search</label>
-            <input id="search-input" type="search" id="form1" class="form-control" [(ngModel)]="searchinput" />
-        </div>
-        <button id="search-button" type="button" class="btn btn-primary" (click)="searchanime()">
-            Go<i class="fas fa-search"></i>
-        </button>
+<div id="body">
+    <main class="container-fluid mx-auto">
+        <section class="pb-5">
 
-        <div class="alert alert-danger ms-5 {{errorBox}}" role="alert">
-            {{errorMessage}}
-        </div>
-    </div>
-    <div class="card mt-5 {{searchBox}}" *ngIf="animeInfo" style="width: 18rem;">
-        <button type="button" class="btn btn-primary mt-2" (click)="addanime()">Add to your favorites</button>
-        <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
-            Added to your favorites!
-        </div>
-        <div class="alert alert-danger mt-2 {{addError}}" role="alert">
-            Unable to add to your favorites!
-        </div>
-        <img src="{{animeInfo.images.webp.image_url }}" class="card-img-top mt-2" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{animeInfo.title}}</h5>
-            <p class="card-text">{{animeInfo.title}}</p>
-            <ul class="list-group small">
-                <li class="list-group-item">Type: {{animeInfo.type}}</li>
-                <li class="list-group-item">Episodes: {{animeInfo.episodes}}</li>
-                <li class="list-group-item">Status: {{animeInfo.status}}</li>
-                <li class="list-group-item">Aired: {{animeInfo.aired.string}}</li>
-                <li class="list-group-item">Premiered: {{animeInfo.season | titlecase }}&nbsp;{{animeInfo.year}}</li>
-                <li class="list-group-item">Broadcast: {{animeInfo.broadcast.string}} </li>
-                <li class="list-group-item">Source: {{animeInfo.Source}}</li>
-                <li class="list-group-item">Genres: <span *ngFor='let gen of animeInfo.genres'>{{gen.name}}&nbsp;</span>
-                </li>
-                <li class="list-group-item">Themes: <span
-                        *ngFor='let theme of animeInfo.themes'>{{theme.name}}&nbsp;</span>
-                </li>
-                <li class="list-group-item">Duration: {{animeInfo.duration}}</li>
-                <li class="list-group-item">Rating: {{animeInfo.rating}}</li>
-            </ul>
-        </div>
-    </div>
+            <div class="row d-flex justify-content-center">
+                <div class="input-group mt-5 d-flex justify-content-center">
+                    <div class="form-outline me-2">
+                        <input id="search-input" type="search" placeholder="Anime Search" id="form1"
+                            class="form-control" [(ngModel)]="searchinput" />
+                    </div>
 
-</main>
+                    <button id="search-button" type="button" class="btn btn-primary rounded" (click)="searchanime()">
+                        Go<i class="fas fa-search"></i>
+                    </button>
+
+                    <div class="alert alert-danger ms-5 {{errorBox}}" role="alert">
+                        {{errorMessage}}
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5 {{searchBox}}" *ngIf="animeInfo">
+                <div class="col-md-2">
+                    <div class="card {{searchBox}}">
+                        <div class="bg-image hover-overlay ripple ripple-surface-light">
+                            <img src="{{animeInfo.images.webp.large_image_url }}" class="img-fluid w-100"
+                                alt="{{animeInfo.title_english}}">
+                            <a href="#">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{animeInfo.title}}</h5>
+                            <ul class="list-group small card-text">
+                                <li class="list-group-item">Type: {{animeInfo.type}}</li>
+                                <li class="list-group-item">Episodes: {{animeInfo.episodes}}</li>
+                                <li class="list-group-item">Status: {{animeInfo.status}}</li>
+                                <li class="list-group-item">Aired: {{animeInfo.aired.string}}</li>
+                                <li class="list-group-item">Premiered: {{animeInfo.season | titlecase
+                                    }}&nbsp;{{animeInfo.year}}
+                                </li>
+                                <li class="list-group-item">Broadcast: {{animeInfo.broadcast.string}} </li>
+                                <li class="list-group-item">Source: {{animeInfo.Source}}</li>
+                                <li class="list-group-item">Genres: <span
+                                        *ngFor='let gen of animeInfo.genres'>{{gen.name}}&nbsp;</span>
+                                </li>
+                                <li class="list-group-item">Themes: <span
+                                        *ngFor='let theme of animeInfo.themes'>{{theme.name}}&nbsp;</span>
+                                </li>
+                                <li class="list-group-item">Duration: {{animeInfo.duration}}</li>
+                                <li class="list-group-item">Rating: {{animeInfo.rating}}</li>
+                            </ul>
+                            <div>
+                                <button type="button" class="btn btn-primary mt-2" (click)="addanime()"
+                                    *ngIf="listInput.id < 1">Add to your
+                                    favorites</button>
+                                <button type="button" class="btn btn-primary mt-2" (click)="deleteById()"
+                                    *ngIf="listInput.id > 0">Delete from
+                                    your favorites</button>
+                                <div class="alert alert-success mt-2 {{addSuccess}}" role="alert">
+                                    Added to your favorites!
+                                </div>
+                                <div class="alert alert-danger mt-2 {{addError}}" role="alert">
+                                    {{addErrorMessage}}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+                                <div class="anime-minibox">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item bg-primary text-white">Score</li>
+                                        <li class="list-group-item">{{animeInfo.score}}</li>
+                                        <li class="list-group-item">{{animeInfo.scored_by}} users</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+                                <div class="anime-minibox">
+                                    <p><label>Ranked</label>&nbsp;<strong>{{animeInfo.rank}}</strong></p>
+                                    <label>Rating:</label>&nbsp;<BR><strong>{{animeInfo.rating}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+                                <div class="anime-minibox">
+                                    <label>Popularity</label>&nbsp;<strong>{{animeInfo.popularity}}</strong>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+                                <div class="anime-minibox">
+                                    <label>Favorites</label>&nbsp;<strong>{{animeInfo.favorites}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+
+                                <div class="anime-minibox">
+                                    <button type="button" class="btn btn-primary mt-2" (click)="addanime()"
+                                        *ngIf="listInput.id < 1">Add to your
+                                        favorites</button>
+                                    <button type="button" class="btn btn-primary mt-2" (click)="deleteById()"
+                                        *ngIf="listInput.id > 0">Delete from
+                                        your favorites</button>
+                                    <div class="alert alert-success mt-2   {{addSuccess}}" role="alert">
+                                        Added to your favorites!
+                                    </div>
+                                    <div class="alert alert-danger mt-2 {{addError}}" role="alert">
+                                        {{addErrorMessage}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+
+                                <div class="anime-minibox">
+                                    <div class="spinner-border text-primary {{spinStatus}}" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <select class="form-select mt-2 {{statusVisibility}}" id="status-select"
+                                        [(ngModel)]="statusInput" (change)="updateStatus()">
+                                        <option *ngFor="let status of StatusList" [ngValue]="status.id">{{status.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div [class]="animeSmallDetails">
+
+                                <div class="anime-minibox">
+                                    <div class="spinner-border text-primary {{spinRate}}" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <select class="form-select anime-rating mt-2 {{rateVisibility}}" id="rating-select"
+                                        [(ngModel)]="ratingInput" (change)="updateRating()">
+                                        <option value="0">Select</option>
+                                        <option *ngFor="let ratelist of RatingList" [ngValue]="ratelist.id">
+                                            {{ratelist.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="button-anime"
+                                data-bs-target="#exampleModalLong"
+                                style="background-image: url( '{{animeInfo.trailer.images.maximum_image_url}}');"
+                                *ngIf="animeInfo.trailer.images.maximum_image_url">
+                                PLAY
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-8 {{searchBox}}" *ngIf="animeInfo.synopsis">
+                        <div class="pb-3">
+                            Synopsis:
+                            <p>{{animeInfo.synopsis}}</p>
+                            <app-comments></app-comments>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Modal -->
+            <div class=" modal fade" id="exampleModalLong" tabindex="-1" aria-labelledby="exampleModal"
+                aria-modal="true" role="dialog" *ngIf="animeInfo">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <iframe id="fancybox-frame" name="fancybox-frame1658979153411" frameborder="0" hspace="0"
+                                scrolling="auto" [src]="ytURL"></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>

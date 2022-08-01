@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080'
+  animeApiUrl: 'https://api.jikan.moe/v4',
+  serverApiUrl: 'http://ec2-3-17-191-189.us-east-2.compute.amazonaws.com:8081',
+  production: false
 };
 
 /*

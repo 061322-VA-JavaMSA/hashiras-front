@@ -1,0 +1,35 @@
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-center row">
+        <div class="d-flex flex-column col-md-8">
+
+            <div class="coment-bottom bg-white p-2 px-4">
+                <div class="d-flex flex-row add-comment-section mt-4 mb-4"><input id="comment" type="text" class="form-control mr-3" placeholder="Add comment" #comment><button (click)="submit(comment.value)" class="btn btn-primary" type="button">Comment</button></div>
+                <div
+                    class="commented-section mt-2">
+                    <div class="d-flex flex-row align-items-center commented-user">
+                        <table id="Anime">
+                            <thead>
+                                <tr>
+                                    <th>User </th>
+                                    <th>Comment</th>
+                                </tr>
+                            </thead>   
+                            
+                            <!-- anime_id: 38000
+author: {id: 1, username: 'charles', password: '12345', fname: 'charles', lname: 'x', …}
+comment: "Demon Slayer is the bee's fish's knees"
+id: 2 -->
+                            <tbody *ngIf="comments">
+                                <tr *ngFor="let com of comments">
+                                    <td>{{com.author['username']}}</td>
+                                    <td>{{com.comment}}</td>
+                                </tr>
+                            </tbody>        
+                        </table>
+                    <div class="comment-text-sm"><span></span></div>
+
+        </div>
+</div>
+</div>
+</div>
+</div>

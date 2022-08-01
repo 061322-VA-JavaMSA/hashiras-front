@@ -1,0 +1,27 @@
+.Search {
+    background-color: #1B1412;
+    color: #DCC237;
+    border-radius: 4px;
+    padding: .2em;
+    margin: .2em; 
+}
+
+.Search:hover {
+    background-color: rgb(11, 88, 160);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    padding: .2em;
+    cursor: pointer;
+}
+
+select {
+    /* border: 2px solid #888888; */
+    border-radius: 6px;
+    padding: .2em;
+    margin: .2em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}

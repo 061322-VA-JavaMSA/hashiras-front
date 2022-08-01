@@ -1,0 +1,57 @@
+.card {
+    border: 0;
+    box-shadow: 0 2px 15px -3px rgb(0 0 0 / 7%), 0 10px 20px -2px rgb(0 0 0 / 4%);
+}
+
+.card ul.small {
+    font-size: .575em;   
+}
+
+.anime-minibox {
+   min-height: 136px;
+ 
+}
+
+.anime-minibox select {
+    font-size: .8em;
+}
+
+.anime-minibox p {
+    color: white;
+}
+.anime-minibox .alert {
+    font-size: .775em;   
+}
+.anime-rating {
+    background-image: url("../../../assets/images/icon-star-score.png");
+}
+button.small {
+    font-size: .875em;   
+}
+
+.modal-content,.modal-dialog {
+    min-height: 800px;
+    min-width: 1000px;
+    background-color: black;
+}
+
+.modal-body {
+    height: 700px;
+}
+
+#button-anime {
+    height: 160px;
+    width: 200px;
+    font-size: -webkit-xxx-large;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: .5em;
+}
+
+#fancybox-frame {
+    border: none;
+    display: block;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}

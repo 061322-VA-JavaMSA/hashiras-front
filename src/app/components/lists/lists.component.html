@@ -1,1 +1,41 @@
-<p>lists works!</p>
+<div id="body">
+    <div class="d-flex justify-content-center">
+        <!-- <input type="number" placeholder="userId" id="user_id" value="{{user_id}}"> -->
+        <select name="Status" id="status" placeholder="Please select an option" [(ngModel)]="statusSelect">
+            <option value=""></option>
+            <option value="CURRENTLY">Watching</option>
+            <option value="WANT">Want to watch</option>
+            <option value="VIEWED">Completed</option>
+            <option value="DROPPED">Dropped</option>
+        </select>
+        <button class="Anime" (click)="getListByUserIdAndStatus()">Show Animes</button>
+    </div>
+    <div class="d-flex justify-content-center">
+        <table id="Anime">
+            <thead>
+                <tr>
+                    <!-- <th>Anime Id</th> -->
+                    <th>Anime Image</th>
+                    <th>Anime Title</th>
+                    <th>User Rating</th>
+                    <th>Average Rating</th>
+                    <th>Trailer</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="AniLists" *ngIf="lists">
+                <tr *ngFor="let list of lists">
+                    <!-- <td>{{list.anime_id}}</td> -->
+                    <td><a routerLink="/favorites/{{list.anime_id}}"><img src="{{list.image}}" alt="{{list.image}}"
+                                width="100px" height="100px"></a></td>
+                    <td><a routerLink="/favorites/{{list.anime_id}}">{{list.title}}</a></td>
+                    <td>{{list.user_rating}}</td>
+                    <td>{{list.score}}</td>
+                    <td><a href="{{list.trailer}}" *ngIf="list.trailer">Watch Trailer</a><span *ngIf="!list.trailer">No
+                            Trailer</span></td>
+                    <td>{{list.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
