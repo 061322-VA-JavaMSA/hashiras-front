@@ -6,6 +6,7 @@ import { ListsComponent } from './components/lists/lists.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,10 @@ const routes: Routes = [
     path: 'favorites',
     component: FavoritesComponent,
   },
-  { path: 'favorites/:id', component: FavoritesComponent }
+  { path: 'favorites/:id', component: FavoritesComponent },
+  { path: 'comments', 
+    component: CommentsComponent,
+  },
 ];
 
 @NgModule({

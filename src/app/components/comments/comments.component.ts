@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import { Comment } from '../../models/comment';
 
 @Component({
-  selector: 'app-commment-section',
-  templateUrl: './commment-section.component.html',
-  styleUrls: ['./commment-section.component.css']
+  selector: 'app-comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.css']
 })
-export class CommmentSectionComponent implements OnInit {
+export class CommentsComponent implements OnInit {
 
   comment: Comment[];
   animeId : number;
@@ -31,10 +31,10 @@ export class CommmentSectionComponent implements OnInit {
     // this.loadComments(1);
     this.animeId = 38000;
     this.userId = 1;
-    this.getComments().subscribe(
-      (comments) => {
-        this.comment = comments;
-      })
+    // this.getComments().subscribe(
+    //   (comments) => {
+    //     this.comment = comments;
+    //   })
   }
 
   loadComments(animeId : number): void {
@@ -64,5 +64,4 @@ export class CommmentSectionComponent implements OnInit {
     )
   );
   }
-
 }
