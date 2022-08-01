@@ -16,7 +16,7 @@ export class CommentsComponent implements OnInit {
   comments: Comment[];
   newComment: Comment;
   animeId: number;
-  userId: string;
+  userId: number;
 
 
 
@@ -28,11 +28,13 @@ export class CommentsComponent implements OnInit {
   submit(comment : string): void {
     this.newComment = new Comment(this.animeId, this.userId, comment);
     this.cs.addComment(this.newComment)
+    this.ngOnInit();
+    this.ngOnInit();
   }
 
   ngOnInit(): void {
       this.animeId = this.fav.animeInfo.mal_id;
-      this.userId = this.fav.loggedInUser.username;
+      this.userId = this.fav.loggedInUser.id;
       this.displayComments(this.animeId);
   }
 
