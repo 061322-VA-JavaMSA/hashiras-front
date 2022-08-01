@@ -6,11 +6,8 @@ async function getCurrentSeason(data) {
 
     if (response.status == 200) {
         let json = await response.json();
-        // console.log(json);
-        // data.currentSeason = json;
         populateTable(data);
     } else {
-        console.log('Unable to fetch season data');
     }
 }
 

@@ -51,6 +51,3 @@ export class NavComponent implements OnInit {
 }
 
 document.body.classList.toggle("dark-theme");
-
-
-

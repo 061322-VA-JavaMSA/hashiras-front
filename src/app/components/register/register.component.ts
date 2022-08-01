@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Users } from 'src/app/models/users';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   loading: boolean;
 
   //
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) { };
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router) { };
 
   ngOnInit(): void {
     // this.newUser = new Users();
@@ -43,8 +44,11 @@ export class RegisterComponent implements OnInit {
 
     this.http.post('http://localhost:8080/users', this.registerForm.value).subscribe(
       data => {
-        console.log(data);
+        this.router.navigate(['']);
       }
     );
+
   }
+
+
 }
